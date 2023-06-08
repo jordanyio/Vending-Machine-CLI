@@ -3,16 +3,19 @@ package com.techelevator.view;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-
 	private PrintWriter out;
 	private Scanner in;
 
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
 		this.in = new Scanner(input);
+	}
+
+	public Menu() {
 	}
 
 	public Object getChoiceFromOptions(Object[] options) {
@@ -26,6 +29,7 @@ public class Menu {
 
 	private Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
+
 		String userInput = in.nextLine();
 		try {
 			int selectedOption = Integer.valueOf(userInput);
@@ -50,4 +54,17 @@ public class Menu {
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
 	}
+
+	public String getUserSlotChoice() {
+		try {
+			String slotChoice = "";
+			slotChoice = in.nextLine();
+			return slotChoice;
+		} catch (NullPointerException e){
+			System.out.println("NULLNULL" + e.getMessage());
+		}
+		return "null";
+	}
+
+
 }
