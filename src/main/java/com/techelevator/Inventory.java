@@ -7,9 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-public class VendingMachineInventory {                      // This will read the CSV file
-    private List<Items> itemsList;
-    public VendingMachineInventory() {
+public class Inventory {                      // This will read the CSV file
+    private static List<Items> itemsList;
+    public Inventory() {
         itemsList = new ArrayList<>();
     }
     public void loadItemsFromFile(String filePath) {
@@ -26,17 +26,14 @@ public class VendingMachineInventory {                      // This will read th
                     itemsList.add(item);
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public List<Items> getItemsList() {
+
+    public static List<Items> getItemsList() {
         return itemsList;
     }
-
-
-
 }
 
 
