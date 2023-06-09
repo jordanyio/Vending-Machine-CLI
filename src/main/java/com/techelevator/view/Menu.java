@@ -14,6 +14,7 @@ public class Menu {
 	private Scanner in;
 	Inventory inventory = new Inventory();
 	private double feedMoney;
+	private int counter = 0;
 
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
@@ -59,7 +60,7 @@ public class Menu {
 						item.setQUANTITY(item.getQUANTITY() - 1); // Subtract 1 from quantity
 						feedMoney -= itemPrice; // Subtract item price from feedMoney
 						System.out.println("Here is your item: " + item.getName());
-						displayMessage();
+						displayMessage(item.getType());
 						System.out.println("Remaining funds: $" + feedMoney);
 						return item;
 					} else {
@@ -77,16 +78,26 @@ public class Menu {
 	}
 
 	public void feedMoneyCounter() {
-		System.out.print("How much money are you depositing? >>> ");
-		double money = in.nextDouble();
-		in.nextLine();
-		feedMoney += money;
+
+		boolean isDoneDeposit = false;
+		while(!isDoneDeposit) {
+
+			System.out.print("How much money are you depositing? >>> ");
+			double money = in.nextDouble();
+			in.nextLine();
+			System.out.print("Do you want to deposit more? Input y/n >>> ");
+			if(in.nextLine().equals("n")) {
+				isDoneDeposit = true;
+			}
+			feedMoney += money;
+		}
+		
+
 
 		DecimalFormat decimalFormat = new DecimalFormat("##.##");
 		feedMoney = Double.parseDouble(decimalFormat.format(feedMoney));
 
 	}
-
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
@@ -123,7 +134,17 @@ public class Menu {
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
 	}
-	private void displayMessage() {
+	private void displayMessage(String type) {
 
+		if(type.equals("Chip")) {
+			System.out.println("Crunch Crunch, Yum!");
+		} else if(type.equals("Candy")) {
+			System.out.println("Munch Munch, Yum!");
+		} else if(type.equals("Drink")) {
+			System.out.println("Glug Glug, Yum!");
+		} else if(type.equals("Gum")) {
+			System.out.println("Chew Chew, Yum!");
+		}
 	}
+
 }

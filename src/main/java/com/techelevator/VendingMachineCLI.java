@@ -17,7 +17,6 @@ public class VendingMachineCLI {
 	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
 	private Menu menu;
-
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
@@ -25,10 +24,9 @@ public class VendingMachineCLI {
 	public void run() {
 
 		while (true) {
-
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-					menu.displayVendingMachineItems();
+				menu.displayVendingMachineItems();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				String choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 				if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
@@ -47,6 +45,7 @@ public class VendingMachineCLI {
 			}
 		}
 	}
+
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
