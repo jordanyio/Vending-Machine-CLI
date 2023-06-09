@@ -1,6 +1,9 @@
 package com.techelevator.view;
 
+import com.techelevator.Inventory;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Items {
@@ -9,9 +12,7 @@ public class Items {
     private double price;
     private String slot;
     private String type;
-    private String tyMessage;
     private int QUANTITY;
-
 
     public Items(String slot, String name, double price, String type ) {
         this.name = name;

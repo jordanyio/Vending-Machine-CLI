@@ -1,6 +1,7 @@
 package com.techelevator.view;
 
 import com.techelevator.Inventory;
+import org.junit.vintage.engine.discovery.IsPotentialJUnit4TestClass;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -91,22 +92,19 @@ public class Menu {
 			System.out.print("How much money are you depositing? >>> ");
 			double money = in.nextDouble();
 			in.nextLine();
-			String transaction = (String.valueOf(money));
+			String transaction = " $" + money + " ";
 
 			System.out.print("Do you want to deposit more? Input y/n >>> ");
 			if(in.nextLine().equals("n")) {
 				isDoneDeposit = true;
 			}
 			feedMoney += money;
-			String transaction2 = "FEED MONEY " + transaction + " " + feedMoney;
+			floatLimit(feedMoney);
+			String currentBalance = "Current Money Provided: $" + feedMoney;
+			System.out.println("\n" + currentBalance + "\n");
+			String transaction2 = "FEED MONEY " + transaction + " $" + feedMoney;
 			logTransactions(transaction2);
 		}
-		
-
-
-		DecimalFormat decimalFormat = new DecimalFormat("##.##");
-		feedMoney = Double.parseDouble(decimalFormat.format(feedMoney));
-
 	}
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
@@ -157,4 +155,32 @@ public class Menu {
 		}
 	}
 
+	public void giveChange() {
+		Items item = null;
+		String transaction = "GIVE CHANGE " + " $" + feedMoney + " $0.00";
+		System.out.println("Have a nice day, here is your change!"  + " $" +feedMoney);
+		feedMoney = 0;
+		logTransactions(transaction);
+
+	}
+
+	public void salesReport() {
+		double totalDollarSales = 0;
+		System.out.println(">'''");
+		List<Items> itemsList = Inventory.getItemsList();
+		for (Items item : itemsList) {
+			if (item.getQUANTITY() < 5) {
+				String salesReport = "";
+				totalDollarSales += (5 - item.getQUANTITY()) * item.getPrice();
+				salesReport += ">" + item.getName() + "|" + (5 - item.getQUANTITY());
+				System.out.println(salesReport);
+			}
+		}
+		floatLimit(totalDollarSales);
+		System.out.println( ">" + "\n" + "**TOTAL SALES** $" + totalDollarSales + "\n" + ">'''");
+	}
+	public void floatLimit(double money) {
+		DecimalFormat decimalFormat = new DecimalFormat("##.##");
+		feedMoney = Double.parseDouble(decimalFormat.format(money));
+	}
 }

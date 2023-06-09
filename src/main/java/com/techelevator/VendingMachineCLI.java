@@ -33,10 +33,10 @@ public class VendingMachineCLI {
 					inMainMenu = false;
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.out.println("System Exiting...");
-					System.out.println("Have a nice day, here is your change!");
-					new logMoney();
-
+					menu.giveChange();
 					System.exit(1);
+				} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
+					menu.salesReport();
 				}
 			} else { // purchase menu
 				String choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
