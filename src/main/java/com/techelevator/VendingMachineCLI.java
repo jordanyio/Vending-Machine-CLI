@@ -33,7 +33,7 @@ public class VendingMachineCLI {
 					inMainMenu = false;
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.out.println("System Exiting...");
-					menu.giveChange();
+
 					System.exit(1);
 				} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
 					menu.salesReport();
@@ -44,6 +44,9 @@ public class VendingMachineCLI {
 					menu.feedMoneyCounter();
 				} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 					menu.searchForItem();
+				} else if(choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					menu.giveChange();
+					inMainMenu = true;
 				} else {
 					inMainMenu = true;
 					System.out.println();

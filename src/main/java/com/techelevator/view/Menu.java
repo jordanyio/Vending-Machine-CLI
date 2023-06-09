@@ -159,8 +159,23 @@ public class Menu {
 		Items item = null;
 		String transaction = "GIVE CHANGE " + " $" + feedMoney + " $0.00";
 		System.out.println("Have a nice day, here is your change!"  + " $" +feedMoney);
-		feedMoney = 0;
+		floatLimit(feedMoney);
+		double remainingChange = feedMoney;
+		int quarters = (int)(remainingChange / 0.25);
+		remainingChange %= 0.25;
+		int dimes = (int)(remainingChange / 0.10);
+		remainingChange %= 0.10;
+		int nickels = (int)(remainingChange / 0.05);
+		//prints the change using all the coins
+		System.out.println("Quarters: " + quarters);
+		System.out.println("Dimes: " + dimes);
+		System.out.println("Nickels: " + nickels);
+
+		feedMoney = 0;					// shows machine return all change to customer
 		logTransactions(transaction);
+
+
+
 
 	}
 
