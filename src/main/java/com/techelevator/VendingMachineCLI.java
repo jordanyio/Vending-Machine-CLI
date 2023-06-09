@@ -22,30 +22,36 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		boolean inMainMenu = true;
 
 		while (true) {
-			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				menu.displayVendingMachineItems();
-			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+			if (inMainMenu) { // main menu
+				String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+					menu.displayVendingMachineItems();
+				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+					inMainMenu = false;
+				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+					System.out.println("System Exiting...");
+					System.out.println("Have a nice day!");
+					System.exit(1);
+				}
+			} else { // purchase menu
 				String choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 				if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 					menu.feedMoneyCounter();
 				} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 					menu.searchForItem();
 				} else {
+					inMainMenu = true;
+					System.out.println();
 					System.out.println("Back to main menu...");
 					System.out.println("Exiting will return your balance");
 				}
-				System.out.println();
-			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				System.out.println("System Exiting...");
-				System.out.println("Have a nice day!");
-				System.exit(1);
 			}
+			System.out.println();
 		}
 	}
-
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
