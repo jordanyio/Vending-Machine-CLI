@@ -33,7 +33,9 @@ public class VendingMachineCLI {
 					inMainMenu = false;
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.out.println("System Exiting...");
-					System.out.println("Have a nice day!");
+					System.out.println("Have a nice day, here is your change!");
+					new logMoney();
+
 					System.exit(1);
 				}
 			} else { // purchase menu

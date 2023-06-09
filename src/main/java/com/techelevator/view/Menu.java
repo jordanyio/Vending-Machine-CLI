@@ -6,8 +6,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
+
+import static com.techelevator.logMoney.logTransactions;
 
 public class Menu {
 	private PrintWriter out;
@@ -15,6 +18,7 @@ public class Menu {
 	Inventory inventory = new Inventory();
 	private double feedMoney;
 	private int counter = 0;
+
 
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
@@ -61,6 +65,8 @@ public class Menu {
 						feedMoney -= itemPrice; // Subtract item price from feedMoney
 						System.out.println("Here is your item: " + item.getName());
 						displayMessage(item.getType());
+						String transaction = item.getName() + " " + item.getSlot() + " " + "$" + item.getPrice() + " $" + feedMoney;
+						logTransactions(transaction);
 						System.out.println("Remaining funds: $" + feedMoney);
 						return item;
 					} else {
@@ -85,11 +91,15 @@ public class Menu {
 			System.out.print("How much money are you depositing? >>> ");
 			double money = in.nextDouble();
 			in.nextLine();
+			String transaction = (String.valueOf(money));
+
 			System.out.print("Do you want to deposit more? Input y/n >>> ");
 			if(in.nextLine().equals("n")) {
 				isDoneDeposit = true;
 			}
 			feedMoney += money;
+			String transaction2 = "FEED MONEY " + transaction + " " + feedMoney;
+			logTransactions(transaction2);
 		}
 		
 
