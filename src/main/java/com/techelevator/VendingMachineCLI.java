@@ -23,7 +23,6 @@ public class VendingMachineCLI {
 
 	public void run() {
 		boolean inMainMenu = true;
-
 		while (true) {
 			if (inMainMenu) { // main menu
 				String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
@@ -33,7 +32,6 @@ public class VendingMachineCLI {
 					inMainMenu = false;
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					System.out.println("System Exiting...");
-
 					System.exit(1);
 				} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
 					menu.salesReport();

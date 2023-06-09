@@ -20,7 +20,6 @@ public class Menu {
 	private double feedMoney;
 	private int counter = 0;
 
-
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
 		this.in = new Scanner(input);
@@ -46,7 +45,6 @@ public class Menu {
 		}
 	}
 
-
 	public Items searchForItem() {
 		System.out.print("Enter the slot of the item you want to purchase. (Enter 'm' to view the menu): ");
 		String userIn = in.nextLine();
@@ -62,11 +60,12 @@ public class Menu {
 				if (item.getQUANTITY() > 0) {
 					double itemPrice = item.getPrice();
 					if (feedMoney >= itemPrice) {
-						item.setQUANTITY(item.getQUANTITY() - 1); // Subtract 1 from quantity
-						feedMoney -= itemPrice; // Subtract item price from feedMoney
+						item.setQUANTITY(item.getQUANTITY() - 1);
+						feedMoney -= itemPrice;
 						System.out.println("Here is your item: " + item.getName());
 						displayMessage(item.getType());
-						String transaction = item.getName() + " " + item.getSlot() + " " + "$" + item.getPrice() + " $" + feedMoney;
+						String transaction = (item.getName() + " " + item.getSlot()
+								+ " " + "$" + item.getPrice() + " $" + feedMoney);
 						logTransactions(transaction);
 						System.out.println("Remaining funds: $" + feedMoney);
 						return item;
@@ -88,7 +87,6 @@ public class Menu {
 
 		boolean isDoneDeposit = false;
 		while(!isDoneDeposit) {
-
 			System.out.print("How much money are you depositing? >>> ");
 			double money = in.nextDouble();
 			in.nextLine();
@@ -125,10 +123,11 @@ public class Menu {
 				choice = options[selectedOption - 1];
 			}
 		} catch (NumberFormatException e) {
-			// eat the exception, an error message will be displayed below since choice will be null
+			//  an error message will be displayed below
 		}
 		if (choice == null) {
-			out.println(System.lineSeparator() + "*** " + userInput + " is not a valid option ***" + System.lineSeparator());
+			out.println(System.lineSeparator() + "*** " + userInput
+					+ " is not a valid option ***" + System.lineSeparator());
 		}
 		return choice;
 	}
@@ -143,15 +142,19 @@ public class Menu {
 		out.flush();
 	}
 	private void displayMessage(String type) {
-
-		if(type.equals("Chip")) {
-			System.out.println("Crunch Crunch, Yum!");
-		} else if(type.equals("Candy")) {
-			System.out.println("Munch Munch, Yum!");
-		} else if(type.equals("Drink")) {
-			System.out.println("Glug Glug, Yum!");
-		} else if(type.equals("Gum")) {
-			System.out.println("Chew Chew, Yum!");
+		switch (type) {
+			case "Chip":
+				System.out.println("Crunch Crunch, Yum!");
+				break;
+			case "Candy":
+				System.out.println("Munch Munch, Yum!");
+				break;
+			case "Drink":
+				System.out.println("Glug Glug, Yum!");
+				break;
+			case "Gum":
+				System.out.println("Chew Chew, Yum!");
+				break;
 		}
 	}
 
@@ -170,13 +173,8 @@ public class Menu {
 		System.out.println("Quarters: " + quarters);
 		System.out.println("Dimes: " + dimes);
 		System.out.println("Nickels: " + nickels);
-
 		feedMoney = 0;					// shows machine return all change to customer
 		logTransactions(transaction);
-
-
-
-
 	}
 
 	public void salesReport() {

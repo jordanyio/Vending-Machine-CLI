@@ -34,9 +34,6 @@ public class Inventory {                      // This will read the CSV file
     public static List<Items> getItemsList() {
         return itemsList;
     }
-
-
-
 }
 
 

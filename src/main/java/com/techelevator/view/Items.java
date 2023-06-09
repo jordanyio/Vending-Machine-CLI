@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Items {
-
     private String name;
     private double price;
     private String slot;
