@@ -45,11 +45,6 @@ public class VendingMachineCLI {
 				} else if(choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					menu.giveChange();
 					inMainMenu = true;
-				} else {
-					inMainMenu = true;
-					System.out.println();
-					System.out.println("Back to main menu...");
-					System.out.println("Exiting will return your balance");
 				}
 			}
 			System.out.println();

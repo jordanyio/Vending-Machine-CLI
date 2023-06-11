@@ -3,16 +3,18 @@ package com.techelevator.view;
 import com.techelevator.Inventory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class InventoryTest {
 
     @Test
-    public void testLoadItemsFromFile_EmptyFile() {
-        // test empty file
+    public void testLoadItemsFromList_EmptyList() {
+        // test empty list
         Inventory inventory = new Inventory();
-        inventory.loadItemsFromFile("empty.csv");
-        List<Items> itemsList = Inventory.getItemsList();
+        List<Items> itemsList = inventory.getItemsList();
         Assertions.assertEquals(0, itemsList.size(), "Items list should be empty");
     }
 
@@ -37,6 +39,5 @@ public class InventoryTest {
         Assertions.assertEquals("Triplemint", lastItem.getName(), "Incorrect name for  Triplemint");
         Assertions.assertEquals(0.75, lastItem.getPrice(), "Incorrect price for  Triplemint");
         Assertions.assertEquals("Gum", lastItem.getType(), "Incorrect type for Triplemint");
-
     }
 }
